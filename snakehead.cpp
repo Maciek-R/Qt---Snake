@@ -17,7 +17,8 @@ SnakeHead::SnakeHead(QGraphicsItem *parent)
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::green);
     setBrush(brush);
-
+    setPen(Qt::NoPen);
+    setZValue(1);
     dir = Direction::Right;
     wantedDir = Direction::None;
  //   setFlag(QGraphicsItem::ItemIsFocusable,true);

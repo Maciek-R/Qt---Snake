@@ -62,6 +62,7 @@ void Game::start(){
     scene->addItem(line3);
     scene->addItem(line4);
 
+
     // create snakeHead
     snakeHead = new SnakeHead();
     scene->addItem(snakeHead);
@@ -78,14 +79,14 @@ void Game::start(){
     snakeBody->setPos(100, 50);
     snakeHead->snakeBodies.push_back(snakeBody);
     scene->addItem(snakeBody);
-
+/*
     snakeBody = new SnakeBody();
     snakeBody->indexQueue=0;
     snakeBody->setPos(50, 50);
     snakeHead->snakeBodies.push_back(snakeBody);
-    scene->addItem(snakeBody);
+    scene->addItem(snakeBody);*/
 
-    snakeHead->setAnimation();
+  //  snakeHead->setAnimation();
 
     timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(checkCollision()));
@@ -101,37 +102,34 @@ void Game::checkCollision()
     if(!timerEnable) return;
     if(snakeHead->isAnimating) return;
 
+    snakeHead->move(10);
+
 
     int typeOfCollision = checkingCollisions();
 
-  //  if(isPaused)
+   // if(isPaused)
    // {
    //     return;
    // }
 
     if(typeOfCollision==1)
     {
-
-     //   if(isPaused){
-
-            isPaused = false;
-       // }
         timerEnable = false;
         snakeHead->isAnimating = true;
 
-        //isPaused = true;
+        isPaused = true;
         SnakeBody * snakeBody = new SnakeBody();
         snakeBody->setPos(snakeHead->getPositionOfLastElement());
         snakeHead->snakeBodies.push_back(snakeBody);
         scene->addItem(snakeBody);
 
 
-        snakeHead->connectLastElement();
+       // snakeHead->connectLastElement();
        // snakeHead->setAnimation();
 
-        snakeHead->animate();
+       // snakeHead->animate();
 
-        randNewApple();
+
 
         timerEnable = true;
         snakeHead->isAnimating = false;
@@ -163,7 +161,7 @@ bool Game::checkCrash()
     qreal snakeY = snakeHead->pos().y();
 
 
-    for(int i=1; i<snakeHead->snakeBodies.size(); ++i)
+    for(int i=25; i<snakeHead->snakeBodies.size(); ++i)
     {
         qreal bodyX = snakeHead->snakeBodies[i]->pos().x();
         qreal bodyY = snakeHead->snakeBodies[i]->pos().y();
@@ -193,7 +191,7 @@ void Game::keyPressEvent(QKeyEvent * event)
     if (event->key() == Qt::Key_Up){
 
         snakeHead->changeWantedDirection(SnakeHead::Direction::Up);
-snakeHead->setAnimation();
+//snakeHead->setAnimation();
 
     }
 
@@ -201,7 +199,7 @@ snakeHead->setAnimation();
     if (event->key() == Qt::Key_Down){
 
         snakeHead->changeWantedDirection(SnakeHead::Direction::Down);
-snakeHead->setAnimation();
+//snakeHead->setAnimation();
 
     }
 
@@ -210,14 +208,14 @@ snakeHead->setAnimation();
 
         snakeHead->changeWantedDirection(SnakeHead::Direction::Right);
 
-snakeHead->setAnimation();
+//snakeHead->setAnimation();
     }
 
     // move left
     if (event->key() == Qt::Key_Left){
 
         snakeHead->changeWantedDirection(SnakeHead::Direction::Left);
-snakeHead->setAnimation();
+//snakeHead->setAnimation();
 
     }
     if (event->key() == Qt::Key_Space){
@@ -251,6 +249,12 @@ int Game::checkingCollisions()
             apple->setBrush(brush);
 
 
+            if(isPaused)
+            {
+                randNewApple();
+                isPaused=false;
+            }
+
             return 0;
         }
 
@@ -260,6 +264,7 @@ int Game::checkingCollisions()
             brush.setStyle(Qt::SolidPattern);
             brush.setColor(Qt::yellow);
             apple->setBrush(brush);
+
 
             ++points;
             return 1;

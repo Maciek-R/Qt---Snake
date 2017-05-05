@@ -1,5 +1,6 @@
 #include "SnakeBody.h"
 #include <QBrush>
+#include <QPen>
 
 SnakeBody::SnakeBody(QGraphicsItem *parent)
     :QObject(), QGraphicsRectItem(parent)
@@ -11,6 +12,8 @@ SnakeBody::SnakeBody(QGraphicsItem *parent)
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::cyan);
     setBrush(brush);
+    setBoundingRegionGranularity(0);
+    setPen(Qt::NoPen);
 
 
     seqGroup = new QSequentialAnimationGroup();
