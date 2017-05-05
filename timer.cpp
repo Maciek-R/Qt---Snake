@@ -27,6 +27,6 @@ void Timer::method()
     lastFrameTimeMillis = tmp;
 
  //   qDebug() << differenceTime;
-        game->nextStep(differenceTime);
+
 
 }

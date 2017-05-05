@@ -29,13 +29,22 @@ SOURCES += main.cpp\
     snakebody.cpp \
     game.cpp \
     Apple.cpp \
-    timer.cpp
+    timer.cpp \
+    mainmenu.cpp \
+    dialog.cpp \
+    namedialog.cpp
 
 HEADERS  += snakewindow.h \
     snakehead.h \
     snakebody.h \
     game.h \
     Apple.h \
-    timer.h
+    timer.h \
+    mainmenu.h \
+    dialog.h \
+    namedialog.h
 
-FORMS    += snakewindow.ui
+FORMS    += snakewindow.ui \
+    mainmenu.ui \
+    dialog.ui \
+    namedialog.ui

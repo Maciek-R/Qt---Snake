@@ -4,6 +4,11 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QDebug>
+#include <QPropertyAnimation>
+#include <QPushButton>
+#include <QSequentialAnimationGroup>
+#include "game.h"
+#include "namedialog.h"
 
 namespace Ui {
 class SnakeWindow;
@@ -17,8 +22,11 @@ public:
     explicit SnakeWindow(QWidget *parent = 0);
     ~SnakeWindow();
 
+    void resizeEvent(QResizeEvent *event);
 private slots:
     void qwerty();
+
+    void end(int);
 
 private:
     Ui::SnakeWindow *ui;
