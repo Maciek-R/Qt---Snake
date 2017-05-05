@@ -14,6 +14,7 @@
 #include <QParallelAnimationGroup>
 #include <QPushButton>
 #include <QSequentialAnimationGroup>
+#include <QDateTime>
 
 
 class Game:  public QObject, public QGraphicsView
@@ -37,6 +38,7 @@ public slots:
 signals:
      void gameOver(int);
 public:
+      qint64 lastFrameTimeMillis;
      int points = 0;
     QTimer * timer;
     bool timerEnable=true;

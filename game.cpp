@@ -88,6 +88,7 @@ void Game::start(){
 
   //  snakeHead->setAnimation();
 
+    lastFrameTimeMillis =  QDateTime::currentMSecsSinceEpoch();
     timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(checkCollision()));
     timer->start(10);
@@ -102,7 +103,10 @@ void Game::checkCollision()
     if(!timerEnable) return;
     if(snakeHead->isAnimating) return;
 
-    snakeHead->move(10);
+    auto tmp = QDateTime::currentMSecsSinceEpoch();
+    auto differenceTime = tmp - lastFrameTimeMillis;
+    lastFrameTimeMillis = tmp;
+    snakeHead->move(differenceTime);
 
 
     int typeOfCollision = checkingCollisions();
@@ -161,7 +165,7 @@ bool Game::checkCrash()
     qreal snakeY = snakeHead->pos().y();
 
 
-    for(int i=25; i<snakeHead->snakeBodies.size(); ++i)
+    for(int i=33; i<snakeHead->snakeBodies.size(); ++i)
     {
         qreal bodyX = snakeHead->snakeBodies[i]->pos().x();
         qreal bodyY = snakeHead->snakeBodies[i]->pos().y();
@@ -253,6 +257,7 @@ int Game::checkingCollisions()
             {
                 randNewApple();
                 isPaused=false;
+                ++points;
             }
 
             return 0;
@@ -266,7 +271,7 @@ int Game::checkingCollisions()
             apple->setBrush(brush);
 
 
-            ++points;
+
             return 1;
         }
 
