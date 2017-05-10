@@ -16,7 +16,6 @@ NameDialog::~NameDialog()
 void NameDialog::on_pushButton_clicked()
 {
     name = ui->lineEdit->text().toStdString();
-
     insertResult();
 
     Dialog dialog;

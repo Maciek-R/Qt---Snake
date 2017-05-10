@@ -9,6 +9,7 @@
 #include <QSequentialAnimationGroup>
 #include "game.h"
 #include "namedialog.h"
+#include "timer.h"
 
 namespace Ui {
 class SnakeWindow;
@@ -22,15 +23,12 @@ public:
     explicit SnakeWindow(QWidget *parent = 0);
     ~SnakeWindow();
 
-    void resizeEvent(QResizeEvent *event);
 private slots:
-    void qwerty();
-
     void end(int);
-
+    void stopTimer();
 private:
     Ui::SnakeWindow *ui;
-   //  QTimer * timer;
+    Timer * timer;
 };
 
 #endif // SNAKEWINDOW_H

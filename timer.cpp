@@ -5,28 +5,22 @@ Timer::Timer(Game * game)
     this->game = game;
 
     timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(method()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
-   // time = new QTime();
-  //  elapsedTimer = new QElapsedTimer();
-  //  elapsedTimer->start();
-    timer->start(10);
 
     lastFrameTimeMillis =  QDateTime::currentMSecsSinceEpoch();
-   // lastFrame = x;
+    timer->start(10);
 }
 
-void Timer::method()
+void Timer::update()
 {
-     //   int x = time->elapsed();
-       // auto x = elapsedTimer->elapsed();
-//qDebug() << x;
-
     auto tmp = QDateTime::currentMSecsSinceEpoch();
     auto differenceTime = tmp - lastFrameTimeMillis;
     lastFrameTimeMillis = tmp;
 
- //   qDebug() << differenceTime;
-
-
+    game->nextMove(differenceTime);
+}
+void Timer::stop()
+{
+    timer->stop();
 }

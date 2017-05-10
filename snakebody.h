@@ -12,15 +12,7 @@ class SnakeBody: public QObject, public QGraphicsRectItem{
     Q_PROPERTY(QPointF pos READ pos WRITE setPos)
 public:
     SnakeBody(QGraphicsItem* parent=NULL);
-    void addAnimation();
-
-    int indexQueue;
-    QSequentialAnimationGroup *seqGroup;
-
-    void clear();
-    void conn();
-public slots:
-    void changed();
+    ~SnakeBody();
 };
 
 #endif // SNAKEBODY_H

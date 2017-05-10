@@ -17,36 +17,34 @@
 #include <QDateTime>
 
 
-class Game:  public QObject, public QGraphicsView
+class Game: public QGraphicsView
 {
     Q_OBJECT
-    bool checkCrash();
 public:
-
     Game(QWidget* parent=NULL);
+    ~Game();
 
     void start();
 
-
     void keyPressEvent(QKeyEvent *event);
-    QGraphicsScene* scene;
 
     bool isPaused = false;
     void randNewApple();
-public slots:
-     void checkCollision();
+    void nextMove(qint64 differenceTime);
+
 signals:
      void gameOver(int);
-public:
-      qint64 lastFrameTimeMillis;
-     int points = 0;
-    QTimer * timer;
-    bool timerEnable=true;
+     void stopTimer();
+private:
+    QGraphicsScene* scene;
+    bool checkCrash();
+    int points = 0;
     SnakeHead* snakeHead;
     Apple* apple;
     int checkingCollisions();
-    void setAnimation();
     void resizeEvent(QResizeEvent *event);
+    void initBoard();
+    void initItems();
 };
 
 #endif // GAME_H

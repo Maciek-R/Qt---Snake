@@ -13,17 +13,14 @@ class Timer: public QObject
 
 private:
     QTimer * timer;
-  //  QTime * time;
-  //  QElapsedTimer * elapsedTimer;
     Game * game;
     qint64 lastFrameTimeMillis;
 
 public:
     Timer(Game *);
-
-
+    void stop();
 public slots:
-    void method();
+    void update();
 };
 
 #endif // TIMER_H
